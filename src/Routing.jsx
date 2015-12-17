@@ -1,10 +1,8 @@
 "use strict";
 import React, {Component} from 'react';
-import {types, PropTypes, Form} from 'Subschema';
+import {PropTypes, Form} from 'Subschema';
 import defaults from 'lodash/object/defaultsDeep';
 import {location, history, matched} from './PropTypes';
-
-var ObjectType = types.Object;
 
 export default class Router extends Component {
     static propTypes = defaults({history}, Form.propTypes);
@@ -18,7 +16,7 @@ export default class Router extends Component {
     constructor(props, ...args) {
         super(props, ...args);
 
-        this.state = {}
+        this.state = {location: {}}
     }
 
     componentWillMount() {
@@ -53,8 +51,8 @@ export default class Router extends Component {
     }
 
     render() {
-        var {history, ...props }  = this.props;
-
-        return <Form {...props}/>
+        var {history, action, ...props }  = this.props;
+        action = action || this.state.location.pathname;
+        return <Form action={action} {...props}/>
     }
 }

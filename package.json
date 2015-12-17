@@ -10,8 +10,8 @@
   },
   "author": "Justin Spears",
   "license": "ISC",
-  "peerDependencies":{
-    "subschema": "^0.53.1",
+  "peerDependencies": {
+    "subschema": "*"
   },
   "devDependencies": {
     "babel-loader": "^5.4.0",
