@@ -1,29 +1,24 @@
 "use strict";
 import React, {Component} from 'react';
-import Routing from '../src/Routing.jsx';
+import {Link, RouteTemplate, Routing } from 'SubschemaRouting';
 import Subschema, {loader} from 'Subschema';
-import Link from '../src/types/Link.jsx';
-import Main from '../src/Main.jsx';
+
 import {  useQueries,useBasename } from 'history'
 import createHistory from 'history/lib/createHashHistory'
+
 const history = useQueries(useBasename(createHistory))({
     basename: '#'
 });
-class Index extends Component {
-
-    render() {
-        return <div>Index Page</div>
-    }
-}
 
 class NotFound extends Component {
 
     render() {
-        return <div>Page Not Found </div>
+        return <div><h3>Page Not Found</h3> <Link href="/" label="To Name"/></div>
     }
 }
-loader.addTemplate({MainTemplate: Main})
-loader.addType({NotFound, Index, Link});
+
+loader.addTemplate({RouteTemplate})
+loader.addType({NotFound, Link});
 
 var schema = {
 
@@ -53,16 +48,16 @@ var schema = {
     },
     fieldsets: [
         {
-            template: "MainTemplate",
+            template: "RouteTemplate",
             pathname: '/',
             fieldsets: [{fields: ["name", "toAge"]}]
         },
         {
-            template: "MainTemplate",
+            template: "RouteTemplate",
             pathname: '/age',
             fieldsets: [{fields: ["age", "toName"]}]
-        },{
-            template: "MainTemplate",
+        }, {
+            template: "RouteTemplate",
             fieldsets: [{fields: ["notFound"]}]
         }
     ]

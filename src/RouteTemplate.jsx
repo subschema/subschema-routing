@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Subschema, {Editor, PropTypes} from 'Subschema';
-import {location} from './PropTypes';
+import {location, matched} from './PropTypes';
 
 
 export default class MainTemplate extends Component {
@@ -13,7 +13,8 @@ export default class MainTemplate extends Component {
 
     static contextTypes = {
         loader: PropTypes.loader.isRequired,
-        location
+        location,
+        matched
     }
 
     static propTypes = {
@@ -22,11 +23,14 @@ export default class MainTemplate extends Component {
     }
 
     render() {
-        if (this.props.pathname == null || this.context.location.pathname === this.props.pathname) {
+        if (this.props.pathname == null) {
+            if (!this.context.matched.isMatched) {
+                return <span>{this.props.children}</span>
+            }
+        } else if (this.context.location.pathname === this.props.pathname) {
+            this.context.matched.isMatched = true;
             return <span>{this.props.children}</span>
-        } else {
-            return <span/>;
         }
+        return null;
     }
-
 }

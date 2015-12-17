@@ -5,11 +5,8 @@ var webpack = require('webpack');
 
 module.exports = {
 
-    devtool: 'eval',
+    devtool: 'sourcemap',
     entry: [
-
-        'webpack-dev-server/client?http://localhost:' + 7000,
-        'webpack/hot/only-dev-server',
         join('public/index.jsx')
     ],
 
@@ -22,9 +19,8 @@ module.exports = {
     },
 
     output: {
-        path: join(".hot"),
-        filename: 'app.entry.js',
-        chunkFilename: '[id].chunk.js',
+        path: join(".build"),
+        filename: 'app.[hash].js',
         publicPath: '/'
     },
     stats: {
@@ -35,23 +31,10 @@ module.exports = {
         loaders: [
             {
                 test: /\.js(x)?$/,
-                exclude: /node_modules/,
-                //do this to prevent babel from translating everything.
                 include: [
+                    //      /node_modules\/(?!(subschema-builder|component-playground|react-))/,
                     join('src'),
                     join('public')
-                ],
-                loaders: ['react-hot', 'babel-loader?stage=0&ignore=buffer']
-            },
-            {
-                test: /\.js(x)?$/,
-                exclude: [
-                    //      /node_modules\/(?!(subschema-builder|component-playground|react-))/,
-                    /babel/,
-                    /react-router/,
-                    /codemirror/,
-                    join('src'),
-                    join('public'),
                 ],
                 loaders: ['babel?stage=0&ignore=buffer']
             }
@@ -61,16 +44,12 @@ module.exports = {
         extensions: ['', '.jsx', '.js'],
         alias: {
             'Subschema': join('node_modules/subschema/dist/subschema-noreact'),
-            'SubschemaRouting': join('src/index.jsx'),
-            'react': join('node_modules/react')
+            'react': join('node_modules/react'),
+            'SubschemaRouting': join('src/index.jsx')
         }
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
-        //     new ExtractTextPlugin('style.css', {allChunks: true}),
-
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
         }),

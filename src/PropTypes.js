@@ -8,7 +8,13 @@ export var location = PropTypes.shape({
     pop: PropTypes.func,
     push: PropTypes.func
 });
-
+export var matched = PropTypes.shape({
+    isMatched: PropTypes.bool
+})
 export var history = PropTypes.shape({
     listen: PropTypes.func
 });
+
+export default {
+    history, location, matched
+}

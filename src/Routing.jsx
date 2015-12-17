@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {types, PropTypes, Form} from 'Subschema';
 import defaults from 'lodash/object/defaultsDeep';
-import {location, history} from './PropTypes';
+import {location, history, matched} from './PropTypes';
 
 var ObjectType = types.Object;
 
@@ -11,7 +11,8 @@ export default class Router extends Component {
     static defaultProps = defaults({}, Form.defaultProps);
     static childContextTypes = defaults({
         location,
-        history
+        history,
+        matched
     }, Form.childContextTypes);
 
     constructor(props, ...args) {
@@ -27,7 +28,10 @@ export default class Router extends Component {
     getChildContext() {
         return {
             location: this.state.location,
-            history: this.props.history
+            history: this.props.history,
+            matched: {
+                isMatched: this.state.isMatched
+            }
         }
     }
 
@@ -38,7 +42,7 @@ export default class Router extends Component {
     }
 
     handleLocation = (location)=> {
-        this.setState({location})
+        this.setState({location, isMatched: false})
     }
 
     setup(props) {
