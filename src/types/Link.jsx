@@ -15,12 +15,14 @@ export default class Link extends Component {
         "search": PropTypes.expression,
         "label": PropTypes.expression,
         "action": PropTypes.oneOf(["PUSH", "POP", "REPLACE"]),
-        "query": PropTypes.object
+        "query": PropTypes.object,
+        activeClass: PropTypes.cssClass
     }
     static defaultProps = {
         "label": "{.}",
         "search": "",
-        "href": ""
+        "href": "",
+        activeClass: "active"
     }
     handleClick = (e)=> {
         e && e.preventDefault();
@@ -31,8 +33,9 @@ export default class Link extends Component {
     }
 
     render() {
+        var isActive = this.props.href === this.context.location.pathname;
         return <a href={this.props.href+this.props.search}
                   onClick={this.handleClick}
-                  className={this.props.className+' '+(this.props.href === this.context.location.pathname ? 'active' : '')}>{this.props.label}</a>
+                  className={this.props.className+' '+(isActive ? ' '+this.props.activeClass : '')}>{this.props.label}</a>
     }
 }

@@ -32,7 +32,7 @@ var schema = {
         toName: {
             template: false,
             type: 'Link',
-            href: '',
+            href: '/',
             label: 'To Name'
         },
         toAge: {
@@ -50,12 +50,12 @@ var schema = {
         {
             template: "RouteTemplate",
             pathname: '/',
-            fieldsets: [{fields: ["name", "toAge"]}]
+            fieldsets: [{fields: ["name", "toAge", "toName"]}]
         },
         {
             template: "RouteTemplate",
             pathname: '/age',
-            fieldsets: [{fields: ["age", "toName"]}]
+            fieldsets: [{fields: ["age", "toAge", "toName"]}]
         }, {
             template: "RouteTemplate",
             fieldsets: [{fields: ["notFound"]}]
