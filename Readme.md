@@ -3,7 +3,7 @@ A simple valueManager based routing approach to subschema. Its an idea,
 trying to come up with a better solution that what is in the subschema
 demo.
 
-
+Its kinda crude, but may improve in time.
 
 ##Usage
 ```sh
@@ -11,11 +11,12 @@ demo.
 ```
 
 ##Example
-```js
+```jsx
 "use strict";
 import React, {Component} from 'react';
-import {Routing, MainTemplate, Link} from 'SubschemaRoutin.jsx';
+import {Link, RouteTemplate, Routing } from 'SubschemaRouting';
 import Subschema, {loader} from 'Subschema';
+
 import {  useQueries,useBasename } from 'history'
 import createHistory from 'history/lib/createHashHistory'
 
@@ -26,12 +27,12 @@ const history = useQueries(useBasename(createHistory))({
 class NotFound extends Component {
 
     render() {
-        return <div>Page Not Found </div>
+        return <div><h3>Page Not Found</h3> <Link href="/" label="To Name"/></div>
     }
 }
 
-loader.addTemplate({MainTemplate})
-loader.addType({NotFound,  Link});
+loader.addTemplate({RouteTemplate})
+loader.addType({NotFound, Link});
 
 var schema = {
 
@@ -60,23 +61,17 @@ var schema = {
         }
     },
     fieldsets: [
-        //Fieldsets can be nested, MainTemplate determines weather to show 
-         // a template
-        
         {
-            template: "MainTemplate",
-            //path to listen to
+            template: "RouteTemplate",
             pathname: '/',
             fieldsets: [{fields: ["name", "toAge"]}]
         },
         {
-            template: "MainTemplate",
-            //path to listen to
+            template: "RouteTemplate",
             pathname: '/age',
             fieldsets: [{fields: ["age", "toName"]}]
-        },{
-        //if pathname is not supplied its a not found page.
-            template: "MainTemplate",
+        }, {
+            template: "RouteTemplate",
             fieldsets: [{fields: ["notFound"]}]
         }
     ]

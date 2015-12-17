@@ -2,14 +2,17 @@
   "name": "subschema-routing",
   "version": "1.0.0",
   "description": "Routing for Subschema",
-  "main": "index.js",
+  "main": "dist/subschema-router.js",
   "scripts": {
     "hot": "webpack-dev-server --config ./hot.webpack.config",
     "demo": "webpack --config ./demo.webpack.config -p",
     "prepublish": "webpack --config ./webpack.config -p"
   },
-  "author": "",
+  "author": "Justin Spears",
   "license": "ISC",
+  "peerDependencies":{
+    "subschema": "^0.53.1",
+  },
   "devDependencies": {
     "babel-loader": "^5.4.0",
     "history": "^1.16.0",
