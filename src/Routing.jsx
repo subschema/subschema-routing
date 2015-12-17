@@ -23,6 +23,17 @@ export default class Router extends Component {
         this.setup(this.props);
     }
 
+    componentWillReceiveProps(props) {
+        if (props.history !== this.props.history) {
+            this.setup(props);
+        }
+    }
+
+    componentWillUnmount() {
+        this.history && this.history();
+        this.history = null;
+    }
+
     getChildContext() {
         return {
             location: this.state.location,
@@ -33,11 +44,6 @@ export default class Router extends Component {
         }
     }
 
-    componentWillReceiveProps(props) {
-        if (props.history !== this.props.history) {
-            this.setup(props);
-        }
-    }
 
     handleLocation = (location)=> {
         this.setState({location, isMatched: false})

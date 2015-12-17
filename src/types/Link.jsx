@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import { PropTypes} from 'Subschema';
-function clzName(name, active) {
-    return (name === active ? 'active' : '');
-}
 import {location,history} from '../PropTypes';
 
 export default class Link extends Component {
