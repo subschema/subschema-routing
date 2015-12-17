@@ -5,7 +5,7 @@ demo.
 
 Its kinda crude, but may improve in time.
 
-[demo](https://subschema.github.io/subschema-routing)
+[demo](http://subschema.github.io/subschema-routing)
 
 ##Usage
 ```sh

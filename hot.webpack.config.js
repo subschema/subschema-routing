@@ -2,13 +2,13 @@ var path = require('path');
 var join = path.join.bind(path, __dirname);
 
 var webpack = require('webpack');
-
+var PORT = 7100;
 module.exports = {
 
     devtool: 'eval',
     entry: [
 
-        'webpack-dev-server/client?http://localhost:' + 7000,
+        'webpack-dev-server/client?http://localhost:' + PORT,
         'webpack/hot/only-dev-server',
         join('public/index.jsx')
     ],
@@ -18,7 +18,7 @@ module.exports = {
         info: true, //  --no-info option
         hot: true,
         inline: true,
-        port: 7100
+        port: PORT
     },
 
     output: {
