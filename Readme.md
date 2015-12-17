@@ -5,6 +5,8 @@ demo.
 
 Its kinda crude, but may improve in time.
 
+[demo](https://subschema.github.io/subschema-routing)
+
 ##Usage
 ```sh
   $ npm install subschema-routing
